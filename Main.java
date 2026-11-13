@@ -3,6 +3,9 @@ public class Main {
     public static void printDetails(Vehicle vehicle) {
         vehicle.displayInfo();
     }
+    public static void performService(Serviceable item){
+        item.service();
+    }
 
     public static void main(String[] args) {
 
@@ -15,6 +18,7 @@ public class Main {
         vehicle.moveBackward();
         vehicle.moveLeft();
         vehicle.moveRight();
+        performService((Serviceable) vehicle);
         System.out.println();
 
         // The same variable now refers to a Motorcycle object.
@@ -24,6 +28,7 @@ public class Main {
         vehicle.moveBackward();
         vehicle.moveLeft();
         vehicle.moveRight();
+        performService((Serviceable) vehicle);
 
         // DEMO 2: One method accepts different Vehicle subclasses.
         System.out.println("\n=== 2. Method Parameter ===");
@@ -37,16 +42,19 @@ public class Main {
         car.moveBackward();
         car.moveLeft();
         car.moveRight();
+        performService((Serviceable) car);
         printDetails(motorcycle);
         motorcycle.moveForward();
         motorcycle.moveBackward();
         motorcycle.moveLeft();
         motorcycle.moveRight();
+        performService((Serviceable) motorcycle);
         printDetails(truck);
         truck.moveForward();
         truck.moveBackward();
         truck.moveLeft();
         truck.moveRight();
+        performService((Serviceable) truck);
 
         // DEMO 3: One array holds different Vehicle subclasses.
         System.out.println("\n=== 3. Polymorphic Array ===");
@@ -57,6 +65,13 @@ public class Main {
                 new Truck("Mitsubishi", "Canter", 2020, 6)
         };
 
+        Serviceable[] serviceables = {
+                new Car("Honda", "City", 2022, 4),
+                new Motorcycle("Honda", "TMX 125", 2021, "125cc Single-Cylinder"),
+                new Truck("Mitsubishi", "Canter", 2020, 6),
+                new Printer()
+        };
+
         for (Vehicle currentVehicle : vehicles) {
             printDetails(currentVehicle);
             currentVehicle.moveForward();
@@ -64,6 +79,10 @@ public class Main {
             currentVehicle.moveLeft();
             currentVehicle.moveRight();
             System.out.println();
+        }
+
+        for (Serviceable serviceable : serviceables) {
+            performService(serviceable);
         }
     }
 }
